@@ -1,0 +1,29 @@
+.mainpage {
+  width: 100%;
+  background: #f3f5f9;
+  height: 100%;
+  // display: flex;
+  // align-items: center;
+  // flex-direction: column;
+
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  .intro {
+    max-width: 100%;
+    height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+
+    flex-direction: column;
+    border-bottom: 1px solid rgba(247, 243, 243, 0.1);
+  }
+  .intro-1 {
+    width: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

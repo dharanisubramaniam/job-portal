@@ -1,0 +1,31 @@
+.header {
+  height: 80px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  img {
+    height: 100%;
+    width: 200px;
+    object-fit: contain;
+  }
+  .link {
+    text-decoration: none;
+    color: #464372;
+    border: 1px solid #3932d8;
+    font-family: helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 10px 30px;
+    border-radius: 5px;
+  }
+  .link:hover {
+    background: #3932d8;
+    color: #fff;
+    transition: all 0.5s ease;
+  }
+}

@@ -1,0 +1,16 @@
+.info {
+  flex: 0.6;
+  height: 130px;
+  width: 100%;
+  color: #464372;
+  font-family: helvetica;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  // border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: #f3f5f9;
+  h2 {
+    font-weight: 500;
+  }
+}
