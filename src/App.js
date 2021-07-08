@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.scss";
 import MainPage from "./components/MainPage/MainPage";
 import Header from "./components/Header/Header";
+import JobPosting from "./components/JobPosting/JobPosting";
 
 import { reducer, initialState } from "./redux/Reducer";
 import { StateContext } from "./redux/StateProvider";
@@ -35,6 +36,10 @@ const App = () => {
     <StateContext.Provider value={{ state, dispatch }}>
       <Router>
         <Switch>
+        <Route path="/post">
+            <Header />
+              <JobPosting />
+          </Route>
           <Route path="/">
             <Header />
 
