@@ -53,6 +53,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 25px;
     .paginationItem {
       background: #fff;
       border: 2px solid #666;
@@ -70,6 +71,11 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+    }
+    .paginationItem:hover {
+      background: #3932d8;
+      transition: all 0.5s ease;
+      color: #fff;
     }
 
     .prev,
