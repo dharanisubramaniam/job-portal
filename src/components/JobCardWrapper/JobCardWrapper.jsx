@@ -21,7 +21,7 @@ const JobCardWrapper = ({ dataLimit, pageLimit }) => {
 
   //pagination states handling
 
-  const [pages, setpages] = useState(Math.round(job.length / dataLimit));
+  const [pages] = useState(Math.round(job.length / dataLimit));
   const [currentPage, setCurrentPage] = useState(1);
   const data = searchResults.length > 0 ? searchResults : job;
 

@@ -3,16 +3,8 @@ import "./JobCard.scss";
 import { Avatar } from "@material-ui/core";
 
 const JobCard = ({ item }) => {
-  const {
-    category,
-    designation,
-    company,
-    experience,
-    location,
-    jobType,
-    jobLink,
-    logo,
-  } = item;
+  const { designation, company, experience, location, jobType, jobLink, logo } =
+    item;
 
   return (
     <div className="jobcard">
@@ -45,7 +37,7 @@ const JobCard = ({ item }) => {
         </p>
       </div>
       <div className="sectionFive">
-        <a href={jobLink} target="_blank">
+        <a href={jobLink} target="_blank" rel="noreferrer">
           Apply now
         </a>
       </div>
