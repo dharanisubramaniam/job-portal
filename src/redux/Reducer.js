@@ -1,5 +1,6 @@
 export const initialState = {
   job: [],
+  jobMetadata: {},
   searchResults: [],
   category: [],
   company: [],
@@ -9,7 +10,7 @@ export const initialState = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case "SET_JOB":
+    case "SET_JOB_DATA":
       return {
         ...state,
         job: action.job,
@@ -39,6 +40,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         jobType: action.jobType,
+      };
+    case "SET_JOB_METADATA":
+      return {
+        ...state,
+        jobMetadata: action.jobMetadata
       };
     default:
       return state;

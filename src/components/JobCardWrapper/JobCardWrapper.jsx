@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./JobCardWrapper.scss";
 import JobCard from "../JobCard/JobCard";
 import { useStateValue } from "../../redux/StateProvider";
+import axios from "axios";
 
-const JobCardWrapper = ({ dataLimit, pageLimit }) => {
+const JobCardWrapper = () => {
   //searchresult handling
+  const baseURL = "http://localhost:5001";
   const { state, dispatch } = useStateValue();
-  const { job, category, searchResults } = state;
+  const { job, category, jobMetadata } = state;
   const categorySelector = (item) => {
-    // const value = e.target.innerHTML;
-    // let regex = new RegExp(`${value}`, `i`);
     console.log(item);
     let result = [];
     result = job.filter((job) => job.category_id === item.id);
@@ -21,37 +21,46 @@ const JobCardWrapper = ({ dataLimit, pageLimit }) => {
   };
 
   //pagination states handling
-
-  const [pages] = useState(Math.round(job.length / dataLimit));
   const [currentPage, setCurrentPage] = useState(1);
-  const data = searchResults.length > 0 ? searchResults : job;
+  const [totalPages, setTotalPages] = useState([]);
 
-  const goToNextPage = () => {
+  const goToNextPage = async () => {
     setCurrentPage(currentPage + 1);
   };
 
-  const goToPreviousPage = () => {
+  const goToPreviousPage = async () => {
     setCurrentPage(currentPage - 1);
   };
 
-  const changePage = (e) => {
-    const pageNumber = Number(e.target.textContent);
-    setCurrentPage(pageNumber);
-  };
-
-  const getPaginatedData = () => {
-    const startIndex = currentPage * dataLimit - dataLimit;
-    const endIndex = startIndex + dataLimit;
-    return data.slice(startIndex, endIndex);
+  const changePage = async (e) => {
+    setCurrentPage(e.target.textContent);
   };
 
   const getPaginatedGroup = () => {
-    let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
-    return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
+    let paginatedGroups = [];
+    if (jobMetadata.total && jobMetadata.perPage) {
+      const totalPages = jobMetadata.total % jobMetadata.perPage === 0 ? jobMetadata.total / jobMetadata.perPage : (jobMetadata.total / jobMetadata.perPage) + 1;
+      paginatedGroups = new Array(totalPages).fill().map((value, index) => index + 1);
+    }
+    setTotalPages(paginatedGroups);
   };
+
+  useEffect(() => {
+    getPaginatedGroup();
+  }, [jobMetadata]);
+
+  useEffect(async () => {
+    const jobres = await axios.get(baseURL + "/api/jobs", { headers: { pageNumber: currentPage, perPage: 2 } });
+    const _job = jobres.data.data;
+    dispatch({ type: "SET_JOB_DATA", job: _job });
+    dispatch({ type: "SET_JOB_METADATA", jobMetadata: jobres.data.metaData });
+  }, [currentPage]);
+
 
   return (
     <div className="JobCardWrapper">
+      <h1>{totalPages.length}</h1>
+      <h1>{currentPage}</h1>
       <div className="category-tabs">
         <p
           onClick={() => {
@@ -72,7 +81,7 @@ const JobCardWrapper = ({ dataLimit, pageLimit }) => {
         ))}
       </div>
       <div className="inner_jobCardWrapper">
-        {getPaginatedData().map((item) => (
+        {job.map((item) => (
           <div>
             <JobCard key={item.id} item={item} />
           </div>
@@ -82,24 +91,24 @@ const JobCardWrapper = ({ dataLimit, pageLimit }) => {
         <button
           className=""
           onClick={goToPreviousPage}
-          className={`prev ${currentPage === 1 ? "disabled" : ""}`}
+          className={`prev ${currentPage == 1 ? "disabled" : ""}`}
         >
           Prev
         </button>
-        {getPaginatedGroup().map((item, index) => (
+        {totalPages.map((item, index) => (
           <button
             key={index}
             onClick={changePage}
             className={`paginationItem ${
-              currentPage === item ? "active" : null
-            }`}
+              currentPage == item ? "active" : null
+              }`}
           >
             <span>{item}</span>
           </button>
         ))}
         <button
           onClick={goToNextPage}
-          className={`next ${currentPage === pages ? "disabled" : ""}`}
+          className={`next ${currentPage == totalPages.length ? "disabled" : ""}`}
         >
           Next
         </button>

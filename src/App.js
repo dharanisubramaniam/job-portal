@@ -15,9 +15,10 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const jobres = await axios.get(baseURL + "/api/jobs");
-        const _job = jobres.data;
-        dispatch({ type: "SET_JOB", job: _job });
+        const jobres = await axios.get(baseURL + "/api/jobs", { headers : { pageNumber: 1, perPage: 2 } });
+        const _job = jobres.data.data;
+        dispatch({ type: "SET_JOB_DATA", job: _job });
+        dispatch({ type: "SET_JOB_METADATA", jobMetadata: jobres.data.metaData });
 
         const categoryres = await axios.get(baseURL + "/api/category");
         const _category = categoryres.data;
