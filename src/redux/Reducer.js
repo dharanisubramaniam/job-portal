@@ -2,6 +2,9 @@ export const initialState = {
   job: [],
   searchResults: [],
   category: [],
+  company: [],
+  location: [],
+  jobType: [],
 };
 
 export const reducer = (state, action) => {
@@ -21,6 +24,21 @@ export const reducer = (state, action) => {
       return {
         ...state,
         category: action.category,
+      };
+    case "SET_COMPANY":
+      return {
+        ...state,
+        company: action.company,
+      };
+    case "SET_LOCATION":
+      return {
+        ...state,
+        location: action.location,
+      };
+    case "SET_JOBTYPE":
+      return {
+        ...state,
+        jobType: action.jobType,
       };
     default:
       return state;

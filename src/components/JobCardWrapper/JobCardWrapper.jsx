@@ -7,12 +7,13 @@ const JobCardWrapper = ({ dataLimit, pageLimit }) => {
   //searchresult handling
   const { state, dispatch } = useStateValue();
   const { job, category, searchResults } = state;
-  const categorySelector = (e) => {
-    const value = e.target.innerHTML;
-    let regex = new RegExp(`${value}`, `i`);
+  const categorySelector = (item) => {
+    // const value = e.target.innerHTML;
+    // let regex = new RegExp(`${value}`, `i`);
+    console.log(item);
     let result = [];
-    result = job.filter((job) => regex.test(job.category));
-    console.log(result);
+    result = job.filter((job) => job.category_id === item.id);
+    console.log(result, "result");
     dispatch({ type: "SEARCH_RESULTS", searchResults: result });
   };
   const allSelector = () => {
@@ -46,7 +47,6 @@ const JobCardWrapper = ({ dataLimit, pageLimit }) => {
 
   const getPaginatedGroup = () => {
     let start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
-    console.log(start);
     return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
   };
 
@@ -62,12 +62,12 @@ const JobCardWrapper = ({ dataLimit, pageLimit }) => {
         </p>
         {category.map((item) => (
           <p
-            key={item.category_id}
-            onClick={(e) => {
-              categorySelector(e);
+            key={item.id}
+            onClick={(item) => {
+              categorySelector(item);
             }}
           >
-            {item.category}
+            {item.name}
           </p>
         ))}
       </div>

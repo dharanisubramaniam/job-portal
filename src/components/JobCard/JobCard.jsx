@@ -1,20 +1,47 @@
 import React from "react";
 import "./JobCard.scss";
 import { Avatar } from "@material-ui/core";
+import { useStateValue } from "../../redux/StateProvider";
 
 const JobCard = ({ item }) => {
-  const { designation, company, experience, location, jobType, jobLink, logo } =
-    item;
+  const { state } = useStateValue();
+  const { location, company, jobType } = state;
+  const {
+    designation,
+    company_id,
+    location_id,
+    job_type_id,
+    salary,
+    min_experience,
+    max_experience,
+    job_link,
+  } = item;
 
   return (
     <div className="jobcard">
       <div className="sectionOne">
-        <Avatar className="avatar" src={logo} />
+        {company.map(
+          (company) =>
+            company.id === company_id && (
+              <Avatar key={company.id} className="avatar" src={company.logo} />
+            )
+        )}
+
         <div className="job-company">
           <h4>{designation}</h4>
-          <span>{company}</span>
+          {company.map(
+            (company) =>
+              company.id === company_id && (
+                <span key={company.id}>{company.name}</span>
+              )
+          )}
         </div>
-        <span className="job-timing">{jobType}</span>
+        {jobType.map(
+          (jobType) =>
+            jobType.id === job_type_id && (
+              <span key={jobType.id}>{jobType.name}</span>
+            )
+        )}
       </div>
       <div className="sectionTwo">
         <div className="exp-posted one">
@@ -22,22 +49,30 @@ const JobCard = ({ item }) => {
           <span>Posted</span>
         </div>
         <div className="exp-posted">
-          <p>{experience} years</p>
+          <p>
+            {min_experience} - {max_experience}years
+          </p>
           <span>Experience</span>
         </div>
         <div className="exp-posted">
-          <p>{location}</p>
+          {location.map(
+            (location) =>
+              location.id === location_id && (
+                <p key={location.id}>{location.name}</p>
+              )
+          )}
+
           <span>Location</span>
         </div>
       </div>
-      <div className="sectionThree">
+      {/* <div className="sectionThree">
         <p>
           In a nutshell Codaholic. A graduate from the Technion, Israel
           Institute of Technology (President’s Excellence: average grade of 94).
         </p>
-      </div>
+      </div> */}
       <div className="sectionFive">
-        <a href={jobLink} target="_blank" rel="noreferrer">
+        <a href={job_link} target="_blank" rel="noreferrer">
           Apply now
         </a>
       </div>

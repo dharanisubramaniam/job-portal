@@ -22,6 +22,18 @@ const App = () => {
         const categoryres = await axios.get(baseURL + "/api/category");
         const _category = categoryres.data;
         dispatch({ type: "SET_CATEGORY", category: _category });
+
+        const companyres = await axios.get(baseURL + "/api/company");
+        const _company = companyres.data;
+        dispatch({ type: "SET_COMPANY", company: _company });
+
+        const jobtyperes = await axios.get(baseURL + "/api/jobType");
+        const _jobType = jobtyperes.data;
+        dispatch({ type: "SET_JOBTYPE", jobType: _jobType });
+
+        const locationres = await axios.get(baseURL + "/api/location");
+        const _loation = locationres.data;
+        dispatch({ type: "SET_LOCATION", location: _loation });
       } catch (error) {
         console.log(error);
       }
