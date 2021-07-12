@@ -2,11 +2,19 @@ import axios from "axios";
 import { useFormik } from "formik";
 import "./JobPosting.scss";
 import { useStateValue } from "../../redux/StateProvider";
+import { fetchData } from "../global/fetch";
+import { useEffect } from "react";
 
 const JobPosting = () => {
   const baseURL = "http://localhost:5001";
   const { state, dispatch } = useStateValue();
-  const { location, company, jobType, category } = state;
+  const { location, company, jobType, category, token } = state;
+  const doAuthCheck = true;
+
+  useEffect(() => {
+    fetchData(true, state, dispatch);
+    // eslint-disable-next-line
+  }, []);
 
   const jobFormik = useFormik({
     initialValues: {
@@ -22,7 +30,11 @@ const JobPosting = () => {
     },
 
     onSubmit: async (values) => {
-      const post = await axios.post(baseURL + "/api/jobs", values);
+      const post = await axios.post(
+        baseURL + "/api/jobs",
+        { headers: { "x-auth-token": token, doAuthCheck } },
+        values
+      );
       console.log(post);
     },
   });
@@ -33,10 +45,14 @@ const JobPosting = () => {
       logo_name_with_ext: "",
     },
     onSubmit: async (values) => {
-      const company = await axios.post(baseURL + "/api/company", {
-        name: values.new_company,
-        logo_name_with_ext: values.logo_name_with_ext,
-      });
+      const company = await axios.post(
+        baseURL + "/api/company",
+        { headers: { "x-auth-token": token, doAuthCheck } },
+        {
+          name: values.new_company,
+          logo_name_with_ext: values.logo_name_with_ext,
+        }
+      );
       console.log("company", company);
     },
   });
@@ -46,11 +62,17 @@ const JobPosting = () => {
       new_category: "",
     },
     onSubmit: async (values) => {
-      const category = await axios.post(baseURL + "/api/category", {
-        name: values.new_category,
-      });
+      const category = await axios.post(
+        baseURL + "/api/category",
+        { headers: { "x-auth-token": token, doAuthCheck } },
+        {
+          name: values.new_category,
+        }
+      );
       console.log("category", category);
-      const categoryres = await axios.get(baseURL + "/api/category");
+      const categoryres = await axios.get(baseURL + "/api/category", {
+        headers: { "x-auth-token": token, doAuthCheck },
+      });
       const _category = categoryres.data;
       dispatch({ type: "SET_CATEGORY", category: _category });
     },
@@ -61,11 +83,17 @@ const JobPosting = () => {
       new_location: "",
     },
     onSubmit: async (values) => {
-      const location = await axios.post(baseURL + "/api/location", {
-        name: values.new_location,
-      });
+      const location = await axios.post(
+        baseURL + "/api/location",
+        { headers: { "x-auth-token": token, doAuthCheck } },
+        {
+          name: values.new_location,
+        }
+      );
       console.log("location", location);
-      const locationres = await axios.get(baseURL + "/api/location");
+      const locationres = await axios.get(baseURL + "/api/location", {
+        headers: { "x-auth-token": token, doAuthCheck },
+      });
       const _location = locationres.data;
       dispatch({ type: "SET_LOCATION", location: _location });
     },
@@ -76,11 +104,17 @@ const JobPosting = () => {
       new_jobType: "",
     },
     onSubmit: async (values) => {
-      const jobType = await axios.post(baseURL + "/api/jobType", {
-        name: values.new_jobType,
-      });
+      const jobType = await axios.post(
+        baseURL + "/api/jobType",
+        { headers: { "x-auth-token": token, doAuthCheck } },
+        {
+          name: values.new_jobType,
+        }
+      );
       console.log("jobType", jobType);
-      const jobTyperes = await axios.get(baseURL + "/api/jobType");
+      const jobTyperes = await axios.get(baseURL + "/api/jobType", {
+        headers: { "x-auth-token": token, doAuthCheck },
+      });
       const _jobType = jobTyperes.data;
       dispatch({ type: "SET_JOBTYPE", jobType: _jobType });
     },

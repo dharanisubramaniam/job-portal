@@ -13,7 +13,7 @@ const MainPage = () => {
         <SearchBar />
       </div>
       <div className="intro-1">
-        <JobCardWrapper dataLimit={10} pageLimit={5} />
+        <JobCardWrapper />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ export const initialState = {
   company: [],
   location: [],
   jobType: [],
+  token: "",
 };
 
 export const reducer = (state, action) => {
@@ -44,7 +45,12 @@ export const reducer = (state, action) => {
     case "SET_JOB_METADATA":
       return {
         ...state,
-        jobMetadata: action.jobMetadata
+        jobMetadata: action.jobMetadata,
+      };
+    case "SET_TOKEN":
+      return {
+        ...state,
+        token: action.token,
       };
     default:
       return state;

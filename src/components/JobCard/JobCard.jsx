@@ -11,7 +11,6 @@ const JobCard = ({ item }) => {
     company_id,
     location_id,
     job_type_id,
-    salary,
     min_experience,
     max_experience,
     job_link,
