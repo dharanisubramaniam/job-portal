@@ -3,7 +3,6 @@ import axios from "axios";
 import "./App.scss";
 import MainPage from "./components/MainPage/MainPage";
 import Header from "./components/Header/Header";
-
 import { reducer, initialState } from "./redux/Reducer";
 import { StateContext } from "./redux/StateProvider";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
