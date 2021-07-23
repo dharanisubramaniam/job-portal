@@ -3,37 +3,59 @@ import { MdSearch } from "react-icons/md";
 import { IoIosCloseCircle } from "react-icons/io";
 import "./SearchBar.scss";
 import { useStateValue } from "../../redux/StateProvider";
+import axios from "axios";
+import { perPage, baseURL } from "../global/config";
 
 const SearchBar = () => {
   const [text, setText] = useState("");
   const [suggestion, setSuggestion] = useState([]);
+  //updating category id from suggestion selected
+  const [categoryId, setcategoryId] = useState(null);
   const { state, dispatch } = useStateValue();
-  const { job } = state;
-  const temp_category = ["Motion Graphics", "Video Editing", "Design Jobs"];
+  const { category } = state;
 
   const onTextChange = (e) => {
     const value = e.target.value;
     let regex = new RegExp(`${value}`, `i`);
-    let result = temp_category.filter((item) => regex.test(item));
+    let result = category.filter((item) => regex.test(item.name));
+    console.log(result);
     setSuggestion(result);
     setText(value);
   };
 
   const suggestionSelected = (category) => {
-    setText(category);
+    // console.log(categoryId, "1st");
+    dispatch({ type: "SET_CURRENTPAGE", currentPage: 1 });
+    setText(category.name);
     setSuggestion([]);
-    let regex = new RegExp(`${category}`, `i`);
-    let result = [];
-    result = job.filter((item) => regex.test(item.category));
-    dispatch({ type: "SEARCH_RESULTS", searchResults: result });
+
+    setcategoryId(category.id);
+    // console.log(categoryId, "2nd");
   };
 
-  const dispatchValue = () => {
-    dispatch({ type: "SET_SUGGESTION", suggestion: text });
+  const dispatchValue = (categoryId) => {
+    console.log("inside dispatch value", categoryId);
+    dispatch({ type: "SET_CATEGORYID", categoryId: categoryId });
   };
 
   const closeIcon = () => {
-    dispatch({ type: "SEARCH_RESULTS", searchResults: [] });
+    dispatch({ type: "SET_CURRENTPAGE", currentPage: 1 });
+    const fetchData = async () => {
+      const jobres = await axios.get(`${baseURL}/api/jobs`, {
+        headers: {
+          pageNumber: 1,
+          perPage: perPage,
+        },
+      });
+      const _job = jobres.data.data;
+      console.log(_job);
+      dispatch({ type: "SET_JOB_DATA", job: _job });
+      dispatch({
+        type: "SET_JOB_METADATA",
+        jobMetadata: jobres.data.metaData,
+      });
+    };
+    fetchData();
     setText("");
     setSuggestion([]);
   };
@@ -47,12 +69,12 @@ const SearchBar = () => {
         <ul>
           {suggestion.map((category) => (
             <li
-              key={category}
+              key={category.id}
               onClick={(e) => {
                 suggestionSelected(category);
               }}
             >
-              {category}
+              {category.name}
             </li>
           ))}
         </ul>
@@ -82,7 +104,7 @@ const SearchBar = () => {
             }}
           />
 
-          <button className="btn" onClick={() => dispatchValue()}>
+          <button className="btn" onClick={() => dispatchValue(categoryId)}>
             Find Job
           </button>
         </div>

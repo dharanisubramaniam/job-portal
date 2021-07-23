@@ -1,19 +1,15 @@
 import React from "react";
 import JobCardWrapper from "../JobCardWrapper/JobCardWrapper";
-import Info from "../Info/Info";
-import SearchBar from "../SearchBar/SearchBar";
 
+import { useParams } from "react-router-dom";
 import "./MainPage.scss";
 
 const MainPage = () => {
+  const { id } = useParams();
   return (
     <div className="mainpage">
-      <div className="intro">
-        <Info />
-        <SearchBar />
-      </div>
       <div className="intro-1">
-        <JobCardWrapper />
+        <JobCardWrapper id={id} />
       </div>
     </div>
   );

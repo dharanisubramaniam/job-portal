@@ -7,6 +7,9 @@ export const initialState = {
   location: [],
   jobType: [],
   token: "",
+  categoryId: null,
+
+  currentPage: 1,
 };
 
 export const reducer = (state, action) => {
@@ -51,6 +54,17 @@ export const reducer = (state, action) => {
       return {
         ...state,
         token: action.token,
+      };
+    case "SET_CATEGORYID":
+      return {
+        ...state,
+        categoryId: action.categoryId,
+      };
+
+    case "SET_CURRENTPAGE":
+      return {
+        ...state,
+        currentPage: action.currentPage,
       };
     default:
       return state;

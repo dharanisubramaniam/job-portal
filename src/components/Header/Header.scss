@@ -11,6 +11,11 @@
     height: 100%;
     width: 200px;
     object-fit: contain;
+    @media screen and (max-width: 480px) {
+      width: 150px;
+      object-fit: contain;
+      height: 100%;
+    }
   }
   .link {
     text-decoration: none;
@@ -22,6 +27,9 @@
     line-height: 20px;
     padding: 10px 30px;
     border-radius: 5px;
+    @media screen and (max-width: 480px) {
+      padding: 10px 15px;
+    }
   }
   .link:hover {
     background: #3932d8;

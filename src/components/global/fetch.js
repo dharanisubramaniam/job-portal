@@ -1,15 +1,14 @@
 import axios from "axios";
+import { perPage, baseURL } from "./config";
 
 export const fetchData = async (doAuthCheck, state, dispatch) => {
-  const baseURL = "http://localhost:5001";
-
   const { token } = state;
 
   //   console.log("inside fetch data count: ", count++);
   try {
     let headers = {
       pageNumber: 1,
-      perPage: 2,
+      perPage: perPage,
     };
     let authHeader = {
       "x-auth-token": token,
@@ -26,15 +25,6 @@ export const fetchData = async (doAuthCheck, state, dispatch) => {
       token,
       doAuthCheck
     ); */
-    const jobres = await axios.get(baseURL + "/api/jobs", {
-      headers,
-    });
-    const _job = jobres.data.data;
-    dispatch({ type: "SET_JOB_DATA", job: _job });
-    dispatch({
-      type: "SET_JOB_METADATA",
-      jobMetadata: jobres.data.metaData,
-    });
 
     if (doAuthCheck) {
       const categoryres = await axios.get(baseURL + "/api/category", {
@@ -62,6 +52,17 @@ export const fetchData = async (doAuthCheck, state, dispatch) => {
       const _loation = locationres.data;
       dispatch({ type: "SET_LOCATION", location: _loation });
     } else {
+      const jobres = await axios.get(baseURL + "/api/jobs", {
+        headers,
+      });
+      const _job = jobres.data.data;
+      console.log("first job api call,1");
+      dispatch({ type: "SET_JOB_DATA", job: _job });
+      dispatch({
+        type: "SET_JOB_METADATA",
+        jobMetadata: jobres.data.metaData,
+      });
+
       const categoryres = await axios.get(baseURL + "/api/category");
       //console.log(categoryres);
       const _category = categoryres.data;

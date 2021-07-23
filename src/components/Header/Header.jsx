@@ -6,7 +6,7 @@ function Header() {
     <div className="header">
       <img src="/assets/Colour.png" alt="logo" />
       <a className="link" href="https://www.filmyeffects.com/">
-        Back To Home
+        Home
       </a>
     </div>
   );
