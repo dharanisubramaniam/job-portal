@@ -14,7 +14,7 @@ const JobCardWrapper = ({ id }) => {
 
   const { state, dispatch } = useStateValue();
   const { job, category, jobMetadata, categoryId, currentPage } = state;
-  const [menuOpen, setMenuOpen] = useState(false);
+
   const [shareResult, setshareResult] = useState();
 
   //initla data fetching
@@ -199,7 +199,6 @@ const JobCardWrapper = ({ id }) => {
     fetchData();
   }
 
-  console.log(menuOpen, "0000000000000");
   //carousel
 
   const carouselRef = useRef(null);

@@ -3,7 +3,6 @@ import "./Footer.scss";
 import { AiFillInstagram, AiFillHeart } from "react-icons/ai";
 import { FaFacebook, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Avatar } from "@material-ui/core";
 
 function Footer() {
   return (
@@ -16,13 +15,13 @@ function Footer() {
         <div className="footer__content">
           <span>Follow us</span>
           <div className="iconWrapper">
-            <Link>
+            <Link to="https://www.facebook.com/Filmyeffects/">
               <FaFacebook className="icon" />
             </Link>
-            <Link to="http://">
+            <Link to="https://www.instagram.com/filmyeffects/">
               <AiFillInstagram className="icon" />
             </Link>
-            <Link>
+            <Link to="https://www.youtube.com/channel/UCHsxcVviQv9XWH0xfUic__w">
               <FaYoutube className="icon" />
             </Link>
           </div>
