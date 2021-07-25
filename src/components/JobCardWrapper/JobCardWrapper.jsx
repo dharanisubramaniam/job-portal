@@ -205,29 +205,26 @@ const JobCardWrapper = ({ id }) => {
   const trackRef = useRef(null);
   let carouselWidth = 0;
 
-  const handleNavLeft = (e) => {
-    console.log(carouselWidth);
-    carouselWidth = carouselWidth > 1100 ? carouselWidth - 1100 : 0;
-    trackRef.current.style.transform = `translateX(
-        -${carouselWidth}px
-      )`;
-  };
+  // const handleNavLeft = (e) => {
+  //   console.log(carouselWidth);
+  //   carouselWidth = carouselWidth > 1100 ? carouselWidth - 1100 : 0;
+  //   trackRef.current.style.transform = `translateX(
+  //       -${carouselWidth}px
+  //     )`;
+  // };
 
-  const handleNavRight = (e) => {
-    carouselWidth = carouselWidth + carouselRef.current.offsetWidth;
-    trackRef.current.style.transform = `translateX(
-        -${carouselWidth}px
-      )`;
-    console.log(trackRef, carouselWidth);
-  };
+  // const handleNavRight = (e) => {
+  //   carouselWidth = carouselWidth + carouselRef.current.offsetWidth;
+  //   trackRef.current.style.transform = `translateX(
+  //       -${carouselWidth}px
+  //     )`;
+  //   console.log(trackRef, carouselWidth);
+  // };
 
   return (
     <div className="JobCardWrapper">
-      <div className="carousel__container" ref={carouselRef}>
-        <div className="carousel__inner">
-          {/* <div className="carousel__track" > */}
           <div className="category-tabs" ref={trackRef}>
-            <p
+            <p  className="link"
               tabIndex="0"
               key={0}
               onClick={() => {
@@ -237,7 +234,7 @@ const JobCardWrapper = ({ id }) => {
               All
             </p>
             {category.map((item) => (
-              <p
+              <p  className="link"
                 tabIndex={item.id + 1}
                 key={item.id}
                 onClick={(e) => {
@@ -248,9 +245,7 @@ const JobCardWrapper = ({ id }) => {
               </p>
             ))}
           </div>
-          {/* </div> */}
-        </div>
-        <div className="carousel__nav">
+        {/* <div className="carousel__nav">
           <IconButton
             className="prev"
             id="icon-button"
@@ -269,8 +264,7 @@ const JobCardWrapper = ({ id }) => {
           >
             <ChevronRightIcon />
           </IconButton>
-        </div>
-      </div>
+        </div> */}
 
       <div className="inner_jobCardWrapper">
         {shareResult

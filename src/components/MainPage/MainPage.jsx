@@ -8,10 +8,8 @@ const MainPage = () => {
   const { id } = useParams();
   return (
     <div className="mainpage">
-      <div className="intro-1">
         <JobCardWrapper id={id} />
       </div>
-    </div>
   );
 };
 

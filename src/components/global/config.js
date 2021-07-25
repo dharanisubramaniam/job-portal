@@ -1,2 +1,2 @@
-export const perPage = 2;
+export const perPage = 3;
 export const baseURL = "http://localhost:5001";

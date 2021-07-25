@@ -1,39 +1,23 @@
+@import "./../../common.scss";
+
 .header {
-  height: 80px;
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  img {
-    height: 100%;
-    width: 200px;
-    object-fit: contain;
-    @media screen and (max-width: 480px) {
-      width: 150px;
-      object-fit: contain;
-      height: 100%;
+    width: 100%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--color-secondary);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    @media screen and (max-width: 768px) and (min-width: 320px) {
+        height: 80px;
     }
   }
-  .link {
-    text-decoration: none;
-    color: #464372;
-    border: 1px solid #3932d8;
-    font-family: helvetica;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-    padding: 10px 30px;
-    border-radius: 5px;
-    @media screen and (max-width: 480px) {
-      padding: 10px 15px;
-    }
-  }
-  .link:hover {
-    background: #3932d8;
-    color: #fff;
-    transition: all 0.5s ease;
-  }
-}
+
+
+ 

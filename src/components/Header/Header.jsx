@@ -4,7 +4,7 @@ import "./Header.scss";
 function Header() {
   return (
     <div className="header">
-      <img src="/assets/Colour.png" alt="logo" />
+      <img className="logo" src="/assets/Colour.png" alt="logo" />
       <a className="link" href="https://www.filmyeffects.com/">
         Home
       </a>

@@ -7,12 +7,8 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <div className="footer">
-      <div className="footer__wrapper">
-        <div className="footer__content">
-          <img src="/assets/Colour.png" alt="logo" />
-        </div>
+        <img className="logo" src="/assets/Colour.png" alt="logo" />
 
-        <div className="footer__content">
           <span>Follow us</span>
           <div className="iconWrapper">
             <Link to="https://www.facebook.com/Filmyeffects/">
@@ -25,20 +21,12 @@ function Footer() {
               <FaYoutube className="icon" />
             </Link>
           </div>
-        </div>
-        <div className="footer__content">
-          <span>Contact</span>
-          <p>filmyeffects@gmail.com</p>
-        </div>
-      </div>
 
-      <div className="footer__copyright">
         <p>
           Made with <AiFillHeart style={{ color: "red", marginTop: "5px" }} />{" "}
           in India. Trademarks belong to their respective owners. All rights
-          reserved © 2021 Filmy Effects.
+          reserved ©2021 Filmy Effects.
         </p>
-      </div>
     </div>
   );
 }
