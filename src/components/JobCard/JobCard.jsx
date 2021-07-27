@@ -53,8 +53,8 @@ const JobCard = ({ item }) => {
   const lastUpdated = getDifferenceInDays(today, temp);
 
   return (
-    <div className="jobCardWrapper">
-      <div className="jobcard">
+    <div className="jobcard">
+      <div className="jobcard-content">
         <div className="sectionOne">
           {company.map(
             (company) =>
@@ -72,32 +72,33 @@ const JobCard = ({ item }) => {
             {company.map(
               (company) =>
                 company.id === company_id && (
-                  <div className="job-company" key={company.id}>
-                    <span key={company.id}>{company.name}</span>
-                    <p>{designation}</p>
+                  <div key={company.id}>
+                    <p className="company" key={company.id}>
+                      {company.name}
+                    </p>
+                    <p className="designation">{designation}</p>
                   </div>
                 )
             )}
-
-            <div className="location">
+            <div className="locationWrapper">
               {location
                 .filter((location) => location_ids.includes(location.id))
                 .map((location, index) => (
-                  <span key={location.id}>
+                  <p key={location.id} className="location">
                     {(index ? ", " : "") + location.name}
-                  </span>
+                  </p>
                 ))}
             </div>
           </div>
           <div className="sectionTwo-row2">
             <div className="wrapper">
-              <p>Exp</p>
+              <p>Experience</p>
               <span>
                 {min_experience} - {max_experience} years
               </span>
             </div>
             <div className="wrapper">
-              <p>Type</p>
+              <p>Job Type</p>
               {jobType
                 .filter((jobType) => job_type_ids.includes(jobType.id))
                 .map((jobType, index) => (
@@ -111,16 +112,14 @@ const JobCard = ({ item }) => {
             {category
               .filter((category) => category_ids.includes(category.id))
               .map((category) => (
-                <p key={category.id}>{category.name}</p>
+                <span key={category.id}>{category.name}</span>
               ))}
           </div>
         </div>
         <div className="sectionThree">
-          <div className="apply-now">
-            <a href={job_link} target="_blank" rel="noreferrer">
-              Apply now
-            </a>
-          </div>
+          <a href={job_link} target="_blank" rel="noreferrer" className="link">
+            Apply now
+          </a>
 
           <Popup
             className="my-popup"
@@ -165,15 +164,13 @@ const JobCard = ({ item }) => {
           </Popup>
         </div>
       </div>
-      <div className="last-updated">
-        <span>
-          {lastUpdated > 0
-            ? lastUpdated === 1
-              ? `Updated yesterday`
-              : `Updated ${lastUpdated} days ago`
-            : ` Updated today`}
-        </span>
-      </div>
+      <p className="lastUpdated">
+        {lastUpdated > 0
+          ? lastUpdated === 1
+            ? `Updated yesterday`
+            : `Updated ${lastUpdated} days ago`
+          : ` Updated today`}
+      </p>
     </div>
   );
 };

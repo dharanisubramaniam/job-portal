@@ -223,29 +223,31 @@ const JobCardWrapper = ({ id }) => {
 
   return (
     <div className="JobCardWrapper">
-          <div className="category-tabs" ref={trackRef}>
-            <p  className="link"
-              tabIndex="0"
-              key={0}
-              onClick={() => {
-                allSelector();
-              }}
-            >
-              All
-            </p>
-            {category.map((item) => (
-              <p  className="link"
-                tabIndex={item.id + 1}
-                key={item.id}
-                onClick={(e) => {
-                  categorySelector(e, item);
-                }}
-              >
-                {item.name}
-              </p>
-            ))}
-          </div>
-        {/* <div className="carousel__nav">
+      <div className="category-tabs" ref={trackRef}>
+        <p
+          className="link"
+          tabIndex="0"
+          key={0}
+          onClick={() => {
+            allSelector();
+          }}
+        >
+          All
+        </p>
+        {category.map((item) => (
+          <p
+            className="link"
+            tabIndex={item.id + 1}
+            key={item.id}
+            onClick={(e) => {
+              categorySelector(e, item);
+            }}
+          >
+            {item.name}
+          </p>
+        ))}
+      </div>
+      {/* <div className="carousel__nav">
           <IconButton
             className="prev"
             id="icon-button"
@@ -268,16 +270,8 @@ const JobCardWrapper = ({ id }) => {
 
       <div className="inner_jobCardWrapper">
         {shareResult
-          ? shareResult.map((item) => (
-              <div key={item.id}>
-                <JobCard key={item.id} item={item} />
-              </div>
-            ))
-          : job.map((item) => (
-              <div key={item.id}>
-                <JobCard key={item.id} item={item} />
-              </div>
-            ))}
+          ? shareResult.map((item) => <JobCard key={item.id} item={item} />)
+          : job.map((item) => <JobCard key={item.id} item={item} />)}
       </div>
       {totalPages.length > 1 && (
         <div className="pagination">
