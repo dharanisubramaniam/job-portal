@@ -13,11 +13,11 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { token } = state;
 
-  // console.log("inside job", state);
+  // console.log("environment : ", process.env.NODE_ENV);
 
   return (
     <StateContext.Provider value={{ state, dispatch }}>
-      <Router>
+      <Router basename="/jobs">
         <Switch>
           <Route path="/login">{token ? <JobPosting /> : <Login />}</Route>
           {/* <Route path="/post">

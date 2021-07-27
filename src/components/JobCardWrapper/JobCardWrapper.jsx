@@ -30,7 +30,7 @@ const JobCardWrapper = ({ id }) => {
 
   const categorySelector = (e, item) => {
     if (id) {
-      window.location.href = "http://localhost:3000/";
+      window.location.href = `${baseURL}/jobs`;
     }
     dispatch({ type: "SET_CURRENTPAGE", currentPage: 1 });
     console.log("inside category selector", item.id);
@@ -156,7 +156,7 @@ const JobCardWrapper = ({ id }) => {
   }, [currentPage]);
   const allSelector = () => {
     if (id) {
-      window.location.href = "http://localhost:3000/";
+      window.location.href = `${baseURL}/jobs`;
     }
     dispatch({ type: "SET_CURRENTPAGE", currentPage: 1 });
     const fetchData = async () => {
