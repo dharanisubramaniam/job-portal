@@ -6,6 +6,7 @@ import { RiShareForwardFill } from "react-icons/ri";
 import { MdContentCopy } from "react-icons/md";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Popup from "reactjs-popup";
+import { baseURL } from "../global/config";
 // import "reactjs-popup/dist/index.css";
 import {
   FacebookIcon,
@@ -30,9 +31,10 @@ const JobCard = ({ item }) => {
     id,
     category_ids,
   } = item;
+  const copiedURL = `${baseURL}/jobs/${id}`;
   const [copy, setCopy] = useState({
     copied: false,
-    value: `${window.location.href}${id}`,
+    value: copiedURL,
   });
 
   // const shareClick = (id) => {
@@ -141,7 +143,7 @@ const JobCard = ({ item }) => {
               </div>
             </CopyToClipboard>
             <FacebookShareButton
-              url={`${window.location.href}/${id}`}
+              url={copiedURL}
               quote="shareURL"
               className="popup-icon"
             >
@@ -151,7 +153,7 @@ const JobCard = ({ item }) => {
               </div>
             </FacebookShareButton>
             <WhatsappShareButton
-              url={`${window.location.href}/${id}`}
+              url={copiedURL}
               quote="shareURL"
               className="popup-icon"
             >
