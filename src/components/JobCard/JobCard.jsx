@@ -7,7 +7,7 @@ import { MdContentCopy } from "react-icons/md";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Popup from "reactjs-popup";
 import { baseURL } from "../global/config";
-// import "reactjs-popup/dist/index.css";
+import MediaQuery from "react-responsive";
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -31,11 +31,6 @@ const JobCard = ({ item }) => {
     id,
     category_ids,
   } = item;
-  const copiedURL = `${baseURL}/jobs/${id}`;
-  const [copy, setCopy] = useState({
-    copied: false,
-    value: copiedURL,
-  });
 
   // const shareClick = (id) => {
   //   console.log("inside share click", id);
@@ -114,7 +109,7 @@ const JobCard = ({ item }) => {
             {category
               .filter((category) => category_ids.includes(category.id))
               .map((category) => (
-                <span key={category.id}>{category.name}</span>
+                <p key={category.id}>{category.name}</p>
               ))}
           </div>
         </div>
@@ -122,48 +117,12 @@ const JobCard = ({ item }) => {
           <a href={job_link} target="_blank" rel="noreferrer" className="link">
             Apply now
           </a>
-
-          <Popup
-            className="my-popup"
-            trigger={
-              <div className="share">
-                <span>Share</span>
-                <RiShareForwardFill className="share-icon" />
-              </div>
-            }
-            position="right center"
-          >
-            <CopyToClipboard
-              text={copy.value}
-              onCopy={() => setCopy({ copied: true })}
-            >
-              <div className="iconWrapper">
-                <MdContentCopy className="popup-icon" />
-                <span>Copy link</span>
-              </div>
-            </CopyToClipboard>
-            <FacebookShareButton
-              url={copiedURL}
-              quote="shareURL"
-              className="popup-icon"
-            >
-              <div className="iconWrapper">
-                <FacebookIcon size={32} round />
-                <span>Facebook</span>
-              </div>
-            </FacebookShareButton>
-            <WhatsappShareButton
-              url={copiedURL}
-              quote="shareURL"
-              className="popup-icon"
-            >
-              <div className="iconWrapper">
-                <WhatsappIcon size={32} round />
-                <span>Whatsapp</span>
-              </div>
-            </WhatsappShareButton>
-            {copy.copied ? <span className="copied">Copied.</span> : null}
-          </Popup>
+          <MediaQuery minWidth={320} maxWidth={760}>
+            <PopupWrapper position="top center" id={id} />
+          </MediaQuery>
+          <MediaQuery minWidth={768}>
+            <PopupWrapper position="right center" id={id} />
+          </MediaQuery>
         </div>
       </div>
       <p className="lastUpdated">
@@ -178,3 +137,54 @@ const JobCard = ({ item }) => {
 };
 
 export default JobCard;
+
+function PopupWrapper({ position, id }) {
+  const copiedURL = `${baseURL}/jobs/${id}`;
+  const [copy, setCopy] = useState({
+    copied: false,
+    value: copiedURL,
+  });
+  return (
+    <Popup
+      className="my-popup"
+      trigger={
+        <div className="share">
+          <span>Share</span>
+          <RiShareForwardFill className="share-icon" />
+        </div>
+      }
+      position={position}
+    >
+      <CopyToClipboard
+        text={copy.value}
+        onCopy={() => setCopy({ copied: true })}
+      >
+        <div className="iconWrapper">
+          <MdContentCopy className="popup-icon" />
+          <span>Copy link</span>
+        </div>
+      </CopyToClipboard>
+      <FacebookShareButton
+        url={copiedURL}
+        quote="shareURL"
+        className="popup-icon"
+      >
+        <div className="iconWrapper">
+          <FacebookIcon size={32} round />
+          <span>Facebook</span>
+        </div>
+      </FacebookShareButton>
+      <WhatsappShareButton
+        url={copiedURL}
+        quote="shareURL"
+        className="popup-icon"
+      >
+        <div className="iconWrapper">
+          <WhatsappIcon size={32} round />
+          <span>Whatsapp</span>
+        </div>
+      </WhatsappShareButton>
+      {copy.copied ? <span className="copied">Copied.</span> : null}
+    </Popup>
+  );
+}

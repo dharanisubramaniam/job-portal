@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./JobCardWrapper.scss";
 import JobCard from "../JobCard/JobCard";
 import { useStateValue } from "../../redux/StateProvider";
@@ -8,6 +8,12 @@ import { perPage, baseURL } from "../global/config";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import IconButton from "@material-ui/core/IconButton";
+// import { BsDot } from "react-icons/bs";
+import MediaQuery from "react-responsive";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper.scss";
+// import Carousel from "react-multi-carousel";
+// import "react-multi-carousel/lib/styles.css";
 
 const JobCardWrapper = ({ id }) => {
   //searchresult handling
@@ -79,7 +85,10 @@ const JobCardWrapper = ({ id }) => {
 
   const changePage = async (e) => {
     //console.log("inside jobcardwrapper setCurrentPage");
-    dispatch({ type: "SET_CURRENTPAGE", currentPage: e.target.textContent });
+    dispatch({
+      type: "SET_CURRENTPAGE",
+      currentPage: Number(e.target.textContent),
+    });
   };
 
   useEffect(() => {
@@ -200,73 +209,88 @@ const JobCardWrapper = ({ id }) => {
   }
 
   //carousel
-
-  const carouselRef = useRef(null);
-  const trackRef = useRef(null);
-  let carouselWidth = 0;
-
-  // const handleNavLeft = (e) => {
-  //   console.log(carouselWidth);
-  //   carouselWidth = carouselWidth > 1100 ? carouselWidth - 1100 : 0;
-  //   trackRef.current.style.transform = `translateX(
-  //       -${carouselWidth}px
-  //     )`;
-  // };
-
-  // const handleNavRight = (e) => {
-  //   carouselWidth = carouselWidth + carouselRef.current.offsetWidth;
-  //   trackRef.current.style.transform = `translateX(
-  //       -${carouselWidth}px
-  //     )`;
-  //   console.log(trackRef, carouselWidth);
+  // const responsive = {
+  //   desktop: {
+  //     breakpoint: { max: 3000, min: 1024 },
+  //     items: 6,
+  //   },
   // };
 
   return (
     <div className="JobCardWrapper">
-      <div className="category-tabs" ref={trackRef}>
-        <p
-          className="link"
-          tabIndex="0"
-          key={0}
-          onClick={() => {
-            allSelector();
-          }}
-        >
-          All
-        </p>
-        {category.map((item) => (
+      <MediaQuery maxWidth={768} minWidth={320}>
+        <div className="category-tabs">
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={3}
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            <SwiperSlide>
+              <p
+                className="link"
+                tabIndex="0"
+                key={0}
+                onClick={() => {
+                  allSelector();
+                }}
+              >
+                All
+              </p>
+            </SwiperSlide>
+
+            {category.map((item) => (
+              <SwiperSlide key={item.id}>
+                <p
+                  className="link"
+                  tabIndex={item.id + 1}
+                  key={item.id}
+                  onClick={(e) => {
+                    categorySelector(e, item);
+                  }}
+                >
+                  {item.name}
+                </p>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </MediaQuery>
+      <MediaQuery minWidth={768}>
+        <div className="category-tabs">
+          {/* <Carousel
+            infinite={true}
+            containerClass="container-with-dots"
+            slidesToSlide={6}
+            responsive={responsive}
+            transitionDuration={1000}
+          > */}
           <p
             className="link"
-            tabIndex={item.id + 1}
-            key={item.id}
-            onClick={(e) => {
-              categorySelector(e, item);
+            tabIndex="0"
+            key={0}
+            onClick={() => {
+              allSelector();
             }}
           >
-            {item.name}
+            All
           </p>
-        ))}
-      </div>
-      {/* <div className="carousel__nav">
-          <IconButton
-            className="prev"
-            id="icon-button"
-            onClick={(e) => {
-              handleNavLeft(e);
-            }}
-          >
-            <ChevronLeftIcon />
-          </IconButton>
-          <IconButton
-            id="icon-button"
-            className="next"
-            onClick={(e) => {
-              handleNavRight(e);
-            }}
-          >
-            <ChevronRightIcon />
-          </IconButton>
-        </div> */}
+
+          {category.map((item) => (
+            <p
+              className="link"
+              tabIndex={item.id + 1}
+              key={item.id}
+              onClick={(e) => {
+                categorySelector(e, item);
+              }}
+            >
+              {item.name}
+            </p>
+          ))}
+          {/* </Carousel> */}
+        </div>
+      </MediaQuery>
 
       <div className="inner_jobCardWrapper">
         {shareResult

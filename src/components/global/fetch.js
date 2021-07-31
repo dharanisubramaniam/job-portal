@@ -4,7 +4,6 @@ import { perPage, baseURL } from "./config";
 export const fetchData = async (doAuthCheck, state, dispatch) => {
   const { token } = state;
 
-  //   console.log("inside fetch data count: ", count++);
   try {
     let headers = {
       pageNumber: 1,
@@ -56,7 +55,7 @@ export const fetchData = async (doAuthCheck, state, dispatch) => {
         headers,
       });
       const _job = jobres.data.data;
-      // console.log("first job api call,1");
+
       dispatch({ type: "SET_JOB_DATA", job: _job });
       dispatch({
         type: "SET_JOB_METADATA",

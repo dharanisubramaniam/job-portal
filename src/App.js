@@ -8,13 +8,20 @@ import { reducer, initialState } from "./redux/Reducer";
 import { StateContext } from "./redux/StateProvider";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
+import BeatLoader from "react-spinners/BeatLoader";
+import { css } from "@emotion/react";
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { token } = state;
+  const { token, job } = state;
 
   // console.log("environment : ", process.env.NODE_ENV);
-
+  const loadingSpinnerCSS = css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+  `;
   return (
     <StateContext.Provider value={{ state, dispatch }}>
       <Router basename="/jobs">
@@ -34,9 +41,20 @@ const App = () => {
 
           <Route path="/">
             <Header />
+
             <div className="app">
               <MainPage />
             </div>
+            {job.length === 0 ? (
+              <BeatLoader
+                color="#3932d8"
+                loading="true"
+                size={10}
+                css={loadingSpinnerCSS}
+              />
+            ) : (
+              ""
+            )}
             <Footer />
           </Route>
         </Switch>
