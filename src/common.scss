@@ -1,13 +1,22 @@
 // @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300,400,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@200;300;500&display=swap");
 
 #root {
+  --color-theme: #4643ea;
+  --color-theme-green: #39e0e0;
+  --color-theme-grey: #2a2a4fbf;
+  --color-theme-lightpurple: #f4f4fd;
+  --color-theme-secondary: #f7f4fd;
   --color-primary: #3932d8;
   --color-secondary: #fff;
   --color-additional: #000;
   --color-gray: #808080;
   --color-share: #d4d2d0;
   --color-skill: #f1f2f6;
-  --font-family-primary: "Roboto", sans-serif;
+  --font-family-primary: "Poppins", sans-serif;
+  --font-family-secondary: "Spartan", sans-serif;
+  // --font-family-secondary: ;
   font-family: var(--font-family-primary);
   font-size: 1rem;
   @media screen and (max-width: 768px) and (min-width: 320px) {
@@ -18,6 +27,11 @@
 body,
 p {
   margin: 0;
+}
+body {
+  @media screen and (max-width: 768px) and (min-width: 320px) {
+    padding: 0 5%;
+  }
 }
 
 .logo {
@@ -35,6 +49,7 @@ p {
   border: 1px solid var(--color-primary);
   padding: 10px 30px;
   border-radius: 0.25rem;
+  cursor: pointer;
   @media screen and (max-width: 768px) and (min-width: 320px) {
     padding: 7px 10px;
   }
@@ -43,4 +58,12 @@ p {
     color: var(--color-secondary);
     transition: all 0.5s ease;
   }
+}
+//website
+.linkHomePage {
+  text-decoration: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding: 3% 4%;
+  font-size: 0.8rem;
 }

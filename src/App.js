@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import BeatLoader from "react-spinners/BeatLoader";
 import { css } from "@emotion/react";
+import Website from "./components/Website/Website";
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -27,10 +28,7 @@ const App = () => {
       <Router basename="/jobs">
         <Switch>
           <Route path="/login">{token ? <JobPosting /> : <Login />}</Route>
-          {/* <Route path="/post">
-            <Header />
-            <JobPosting />
-          </Route> */}
+
           <Route path="/:id">
             <Header />
             <div className="app">
@@ -39,7 +37,7 @@ const App = () => {
             <Footer />
           </Route>
 
-          <Route path="/">
+          <Route path="/creativejobs">
             <Header />
 
             <div className="app">
@@ -55,6 +53,11 @@ const App = () => {
             ) : (
               ""
             )}
+            <Footer />
+          </Route>
+          <Route path="/">
+            <Header />
+            <Website />
             <Footer />
           </Route>
         </Switch>

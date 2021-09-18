@@ -8,12 +8,11 @@
   font-weight: 400;
   padding: 1%;
   min-height: 12em;
-  //   height: 12em;
   max-height: 100%;
   transition: transform 0.4s ease;
   &:hover {
     transform: scale(1.05);
-    border: 1px solid #3932d8;
+    border: 1px solid var(--color-primary);
   }
   @media screen and (max-width: 768px) and (min-width: 320px) {
     width: 100%;
@@ -31,7 +30,7 @@
       flex-direction: column;
       align-items: center;
     }
-    .sectionOne {
+    .jobcard-sectionOne {
       flex: 0.15;
       .avatar {
         height: 55px;
@@ -45,7 +44,7 @@
         }
       }
     }
-    .sectionTwo {
+    .jobcard-sectionTwo {
       flex: 0.55;
       display: flex;
       flex-direction: column;
@@ -153,7 +152,7 @@
         }
       }
     }
-    .sectionThree {
+    .jobcard-sectionThree {
       flex: 0.3;
       display: flex;
       flex-direction: column;
@@ -165,7 +164,7 @@
         padding: 5% 8%;
         width: 80%;
         margin-top: 7%;
-        border-radius: 5px;
+        border-radius: 0.25rem;
         white-space: nowrap;
         text-align: center;
       }
@@ -175,7 +174,7 @@
         justify-content: center;
         width: 50%;
         padding: 5px 10px;
-        border-radius: 5px;
+        border-radius: 0.25rem;
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         background: var(--color-share);
         margin-top: 50%;
@@ -211,20 +210,15 @@
     font-size: 0.8rem;
     padding: 2% 2% 2% 0;
   }
-  .copied {
-    color: red;
-  }
 }
 .my-popup-content {
   margin: auto;
-  background: #f1f2f6;
+  background: var(--color-skill);
   width: 100%;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 0.25rem;
 
   @media screen and (max-width: 768px) and (min-width: 320px) {
-    // top: 70% !important;
-    // left: 50% !important;
     display: flex;
     flex-wrap: wrap;
     width: 50%;
@@ -232,7 +226,7 @@
   }
 }
 .my-popup-arrow {
-  color: #f1f2f6;
+  color: var(--color-skill);
 }
 [role="tooltip"].my-popup-content {
   width: 130px;
@@ -260,8 +254,8 @@
 
   span {
     font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    color: black;
+    font-size: 1rem;
+    color: var(--color-additional);
     margin-left: 5px;
     @media screen and (max-width: 768px) and (min-width: 320px) {
       display: none;
@@ -270,6 +264,6 @@
 }
 .copied {
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  color: black;
+  font-size: 1rem;
+  color: var(--color-additional);
 }

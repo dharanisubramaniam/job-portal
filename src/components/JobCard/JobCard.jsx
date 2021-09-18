@@ -52,7 +52,7 @@ const JobCard = ({ item }) => {
   return (
     <div className="jobcard">
       <div className="jobcard-content">
-        <div className="sectionOne">
+        <div className="jobcard-sectionOne">
           {company.map(
             (company) =>
               company.id === company_id && (
@@ -64,7 +64,7 @@ const JobCard = ({ item }) => {
               )
           )}
         </div>
-        <div className="sectionTwo">
+        <div className="jobcard-sectionTwo">
           <div className="sectionTwo-row1">
             {company.map(
               (company) =>
@@ -113,7 +113,7 @@ const JobCard = ({ item }) => {
               ))}
           </div>
         </div>
-        <div className="sectionThree">
+        <div className="jobcard-sectionThree">
           <a href={job_link} target="_blank" rel="noreferrer" className="link">
             Apply now
           </a>

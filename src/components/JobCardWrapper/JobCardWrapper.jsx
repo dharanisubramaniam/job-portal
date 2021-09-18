@@ -12,8 +12,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MediaQuery from "react-responsive";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.scss";
-// import Carousel from "react-multi-carousel";
-// import "react-multi-carousel/lib/styles.css";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const JobCardWrapper = ({ id }) => {
   //searchresult handling
@@ -208,13 +208,13 @@ const JobCardWrapper = ({ id }) => {
     fetchData();
   }
 
-  //carousel
-  // const responsive = {
-  //   desktop: {
-  //     breakpoint: { max: 3000, min: 1024 },
-  //     items: 6,
-  //   },
-  // };
+  //carousel;
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 6,
+    },
+  };
 
   return (
     <div className="JobCardWrapper">
@@ -258,37 +258,37 @@ const JobCardWrapper = ({ id }) => {
       </MediaQuery>
       <MediaQuery minWidth={768}>
         <div className="category-tabs">
-          {/* <Carousel
+          <Carousel
             infinite={true}
             containerClass="container-with-dots"
             slidesToSlide={6}
             responsive={responsive}
             transitionDuration={1000}
-          > */}
-          <p
-            className="link"
-            tabIndex="0"
-            key={0}
-            onClick={() => {
-              allSelector();
-            }}
           >
-            All
-          </p>
-
-          {category.map((item) => (
             <p
               className="link"
-              tabIndex={item.id + 1}
-              key={item.id}
-              onClick={(e) => {
-                categorySelector(e, item);
+              tabIndex="0"
+              key={0}
+              onClick={() => {
+                allSelector();
               }}
             >
-              {item.name}
+              All
             </p>
-          ))}
-          {/* </Carousel> */}
+
+            {category.map((item) => (
+              <p
+                className="link"
+                tabIndex={item.id + 1}
+                key={item.id}
+                onClick={(e) => {
+                  categorySelector(e, item);
+                }}
+              >
+                {item.name}
+              </p>
+            ))}
+          </Carousel>
         </div>
       </MediaQuery>
 
